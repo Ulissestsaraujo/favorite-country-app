@@ -1,11 +1,12 @@
-version: "3.8"
+version: '3.8'
+
 services:
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: country_favorites
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -19,11 +20,11 @@ services:
     ports:
       - "4000:4000"
     environment:
-      - DB_USER=user
-      - DB_NAME=country_favorites
-      - DB_PASSWORD=password
-      - DB_HOST=db
-      - PORT=4000
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - PORT=${PORT}
     depends_on:
       - db
 
@@ -32,7 +33,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - REACT_APP_API_URL=http://backend:4000/graphql
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
     depends_on:
       - backend
 
