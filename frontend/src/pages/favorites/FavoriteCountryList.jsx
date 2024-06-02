@@ -6,9 +6,11 @@ import { DELETE_FAVORITE_COUNTRY_MUTATION } from "../../graphql/mutations";
 import { useFavoriteCountriesContext } from "../../context/FavoriteCountriesContext";
 import { useMutation } from "@apollo/client";
 import TableStructure from "../../components/TableStructure";
+import { useNavigate } from "react-router-dom";
 
 const FavoriteCountryList = () => {
   const { state, dispatch } = useFavoriteCountriesContext();
+  const goTo = useNavigate();
   const [
     deleteFavoriteCountryMutation,
     { loading: loadingMutation, error: errorMutation },
@@ -29,6 +31,10 @@ const FavoriteCountryList = () => {
     },
     [deleteFavoriteCountryMutation, dispatch]
   );
+
+  const handleUpdateFavoriteClick = (favoriteId, notes) => {
+    goTo("/update-favorite-form", { state: { favoriteId, notes } });
+  };
 
   if (loadingMutation) return <>Loading...</>;
 
@@ -56,7 +62,8 @@ const FavoriteCountryList = () => {
               country={favCountry.country}
               notes={favCountry.notes}
               favoriteId={favCountry.id}
-              handleDelete={handleRemoveFavoriteClick}
+              handleDeleteFavorite={handleRemoveFavoriteClick}
+              handleUpdateFavorite={handleUpdateFavoriteClick}
             />
           );
         })}

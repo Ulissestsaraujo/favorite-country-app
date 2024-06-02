@@ -12,6 +12,7 @@ const AddFavoriteCountryForm = () => {
   const location = useLocation();
 
   const [countries, setCountries] = useState([]);
+  const { state } = useFavoriteCountriesContext();
   const { loading, error: errorCountries, data } = useQuery(GET_COUNTRIES);
 
   const [selectedCountry, setSelectedCountry] = useState(
@@ -47,7 +48,12 @@ const AddFavoriteCountryForm = () => {
 
   useEffect(() => {
     if (data.countries) {
-      setCountries(data.countries);
+      setCountries(
+        data.countries.filter(
+          (country) =>
+            !state?.favoriteCountries?.find((x) => x.country_id === country.id)
+        )
+      );
     }
   }, [data]);
 

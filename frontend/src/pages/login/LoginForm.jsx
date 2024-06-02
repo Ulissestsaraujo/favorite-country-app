@@ -4,6 +4,7 @@ import { LOGIN_MUTATION } from "../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
 import AuthenticationContext from "../../context/AuthenticationContext";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
+import TextInput from "../../components/TextInput";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -35,7 +36,7 @@ const LoginForm = () => {
             <label className="block text-sm font-medium text-gray-700">
               Username
             </label>
-            <input
+            <TextInput
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -46,7 +47,7 @@ const LoginForm = () => {
             <label className="block text-sm font-medium text-gray-700">
               Password
             </label>
-            <input
+            <TextInput
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

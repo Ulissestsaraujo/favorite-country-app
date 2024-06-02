@@ -1,17 +1,17 @@
 import React from "react";
 import CountryCard from "../../../components/CountryCard";
 import { formatNumberWithCommas } from "../../../utils/formatNumber";
-import { useNavigate } from "react-router-dom";
+
 import TableRow from "../../../components/TableRow";
 import TableCell from "../../../components/TableCell";
 
-const FavoriteCountryRow = ({ country, notes, handleDelete, favoriteId }) => {
-  const goTo = useNavigate();
-
-  const handleUpdateFavoriteClick = () => {
-    goTo("/update-favorite-form", { state: { favoriteId, notes } });
-  };
-
+const FavoriteCountryRow = ({
+  country,
+  notes,
+  handleDeleteFavorite,
+  handleUpdateFavorite,
+  favoriteId,
+}) => {
   return (
     <TableRow>
       <TableCell>
@@ -23,7 +23,7 @@ const FavoriteCountryRow = ({ country, notes, handleDelete, favoriteId }) => {
       <TableCell>
         <div className="flex items-center justify-center">
           <button
-            onClick={handleUpdateFavoriteClick}
+            onClick={() => handleUpdateFavorite(favoriteId, notes)}
             className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
             Update
@@ -33,7 +33,7 @@ const FavoriteCountryRow = ({ country, notes, handleDelete, favoriteId }) => {
       <TableCell>
         <div className="flex items-center justify-center">
           <button
-            onClick={() => handleDelete(favoriteId)}
+            onClick={() => handleDeleteFavorite(favoriteId)}
             className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
           >
             Delete

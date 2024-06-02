@@ -8,9 +8,11 @@ import { useFavoriteCountriesContext } from "../../context/FavoriteCountriesCont
 import TableHeaders from "../../components/TableStructure";
 import SearchBar from "../../components/SearchBar";
 import AuthenticationContext from "../../context/AuthenticationContext";
+import { useNavigate } from "react-router-dom";
 
 const CountryList = () => {
   const { loading, error, data } = useQuery(GET_COUNTRIES);
+  const goTo = useNavigate();
   const { userId } = useContext(AuthenticationContext);
   const { state, dispatch } = useFavoriteCountriesContext();
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,6 +36,10 @@ const CountryList = () => {
     },
     [deleteFavoriteCountryMutation, dispatch]
   );
+
+  const handleAddFavoriteClick = (countryId) => {
+    goTo("/add-favorite-form", { state: { countryId: countryId } });
+  };
 
   if (loading || loadingMutation) return <p>Loading...</p>;
   if (error || errorMutation) return <p>Error :(</p>;
@@ -63,7 +69,8 @@ const CountryList = () => {
               country={country}
               favoriteId={favoriteId}
               authorized={!!userId}
-              handleDelete={handleRemoveFavoriteClick}
+              handleAddFavorite={handleAddFavoriteClick}
+              handleDeleteFavorite={handleRemoveFavoriteClick}
             />
           );
         })}
