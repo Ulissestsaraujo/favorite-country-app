@@ -55,7 +55,7 @@ const AddFavoriteCountryForm = () => {
         )
       );
     }
-  }, [data]);
+  }, [data, state?.favoriteCountries]);
 
   useEffect(() => {
     if (selectedCountry) {
@@ -86,7 +86,6 @@ const AddFavoriteCountryForm = () => {
     }
   };
 
-  if (loading || loadingMutation || loadingCountry) return <p>Loading...</p>;
   if (errorCountries || errorMutation || errorCountry) return <p>Error :(</p>;
 
   return (

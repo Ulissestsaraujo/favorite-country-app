@@ -36,8 +36,6 @@ const FavoriteCountryList = () => {
     goTo("/update-favorite-form", { state: { favoriteId, notes } });
   };
 
-  if (loadingMutation) return <>Loading...</>;
-
   if (errorMutation) return <>Error:{errorMutation}</>;
 
   const headers = [

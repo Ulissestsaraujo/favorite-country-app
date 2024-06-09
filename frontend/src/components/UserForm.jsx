@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextInput from "./TextInput";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 
@@ -7,14 +7,19 @@ const UserForm = ({ title, onSubmit, loading, error, buttonText }) => {
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState("");
 
+  useEffect(() => {
+    if (error) {
+      setFormError("Invalid username or password. Please try again.");
+    } else {
+      setFormError("");
+    }
+  }, [error]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (error) {
-      setFormError(error);
-      return;
+    if (formError) {
+      setFormError("");
     }
-    setFormError("");
-
     try {
       await onSubmit(username, password);
     } catch (err) {

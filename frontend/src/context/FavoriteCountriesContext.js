@@ -83,8 +83,6 @@ export const FavoriteCountriesProvider = ({ children }) => {
   if (error) console.error(error);
   if (errorFavorites) console.error(errorFavorites);
 
-  if (loading || loadingFavorites) return <>Loading..</>;
-
   return (
     <FavoriteCountriesContext.Provider value={{ state, dispatch }}>
       {children}

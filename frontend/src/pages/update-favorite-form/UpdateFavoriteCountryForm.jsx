@@ -43,7 +43,6 @@ const UpdateFavoriteCountryForm = () => {
     }
   };
 
-  if (loadingMutation || loadingMutation) return <p>Loading...</p>;
   if (errorMutation || errorMutation) return <p>Error :(</p>;
 
   return (

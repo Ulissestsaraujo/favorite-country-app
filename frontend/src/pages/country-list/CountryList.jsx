@@ -41,14 +41,13 @@ const CountryList = () => {
     goTo("/add-favorite-form", { state: { countryId: countryId } });
   };
 
-  if (loading || loadingMutation) return <p>Loading...</p>;
   if (error || errorMutation) return <p>Error :(</p>;
 
   const headers = userId
     ? ["Country", "Capital", "Population", "Manage Favorites"]
     : ["Country", "Capital", "Population"];
 
-  const filteredCountries = data.countries.filter((country) =>
+  const filteredCountries = data?.countries?.filter((country) =>
     country.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -59,7 +58,7 @@ const CountryList = () => {
       </h2>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <TableHeaders headers={headers}>
-        {filteredCountries.map((country) => {
+        {filteredCountries?.map((country) => {
           const favoriteId = state?.favoriteCountries?.find(
             (x) => x.country_id === country.id
           )?.id;
